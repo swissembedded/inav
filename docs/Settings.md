@@ -592,6 +592,16 @@ Blackbox logging rate numerator. Use num/denom settings to decide if a frame sho
 
 ---
 
+### crash_g_threshold
+
+Crash detection impact threshold [g x 10]: an acceleration spike above this, followed by the aircraft lying still within 3 s (no rotation, resting 1 g, frozen baro altitude and - with a GPS fix - no ground speed), CUTS the motor while staying armed. Moving the throttle to zero and up again re-allows the motor (short bursts help locating the aircraft in high grass). Works on any flying platform (fixed wing and multirotor). Arms only once clearly in flight (a fixed-wing hand launch, or throttle held above cruise for a moment), so a hand-launched aircraft can be carried armed. Without GPS a smooth still moment right after a hard maneuver can read as a crash - raise the threshold above your maneuver g load on GPS-less models. 0 = off.
+
+| Default | Min | Max |
+| --- | --- | --- |
+| 80 | 0 | 160 |
+
+---
+
 ### cruise_power
 
 Power draw at cruise throttle used for remaining flight time/distance estimation in 0.01W unit

@@ -321,6 +321,8 @@ main_sources(COMMON_SRC
     fc/stats.c
     fc/stats.h
 
+    flight/crash_detection.c
+    flight/crash_detection.h
     flight/failsafe.c
     flight/failsafe.h
     flight/imu.c

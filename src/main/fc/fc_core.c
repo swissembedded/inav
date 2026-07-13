@@ -89,6 +89,7 @@
 #include "flight/imu.h"
 #include "flight/rate_dynamics.h"
 
+#include "flight/crash_detection.h"
 #include "flight/failsafe.h"
 #include "flight/power_limits.h"
 
@@ -962,6 +963,11 @@ void taskMainPidLoop(timeUs_t currentTimeUs)
 #endif
 
     processPilotAndFailSafeActions(dT);
+
+#ifdef USE_CRASH_DETECTION
+    // impact followed by stillness stops the motor (hand-launch aware)
+    crashDetectionUpdate(dT);
+#endif
 
     // Check battery, GPS signal, arming status etc @ 200 Hz
     static uint8_t armingStatusDivider = 0;

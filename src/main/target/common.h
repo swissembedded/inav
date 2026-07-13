@@ -75,6 +75,10 @@
 #define USE_RATE_DYNAMICS
 #define USE_EXTENDED_CMS_MENUS
 
+// Crash detection: impact + stillness cuts the motor while staying armed,
+// on any flying platform. Small and generally useful.
+#define USE_CRASH_DETECTION
+
 // Allow default rangefinders
 #define USE_RANGEFINDER
 #define USE_RANGEFINDER_MSP
