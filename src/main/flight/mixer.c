@@ -45,6 +45,7 @@
 #include "fc/control_profile.h"
 #include "fc/settings.h"
 
+#include "flight/crash_detection.h"
 #include "flight/failsafe.h"
 #include "flight/imu.h"
 #include "flight/mixer.h"
@@ -670,6 +671,18 @@ uint16_t setDesiredThrottle(uint16_t throttle, bool allowMotorStop)
 
 motorStatus_e getMotorStatus(void)
 {
+#ifdef USE_CRASH_DETECTION
+    // After a detected crash the motor stays cut until the pilot re-allows
+    // it. Stopping via the motor status (not just the throttle command) is
+    // what actually holds a multirotor still: the throttle command is added
+    // to the per-motor PID mix, so lowering it alone would let the attitude
+    // loops keep spinning a crashed copter's motors; the stopped status
+    // forces every motor to idle directly.
+    if (crashDetectionMotorCut()) {
+        return MOTOR_STOPPED_USER;
+    }
+#endif
+
     if (STATE(NAV_MOTOR_STOP_OR_IDLE)) {
         return MOTOR_STOPPED_AUTO;
     }
