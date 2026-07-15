@@ -592,13 +592,13 @@ Blackbox logging rate numerator. Use num/denom settings to decide if a frame sho
 
 ---
 
-### crash_g_threshold
+### crash_detection
 
-Crash detection impact threshold [g x 10]: an acceleration spike above this, followed by the aircraft lying still within 3 s (no rotation, resting 1 g, frozen baro altitude and - with a GPS fix - no ground speed), CUTS the motor while staying armed. Moving the throttle to zero and up again re-allows the motor (short bursts help locating the aircraft in high grass). Works on any flying platform (fixed wing and multirotor). Arms only once clearly in flight (a fixed-wing hand launch, or throttle held above cruise for a moment), so a hand-launched aircraft can be carried armed. Without GPS a smooth still moment right after a hard maneuver can read as a crash - raise the threshold above your maneuver g load on GPS-less models. 0 = off.
+Cut the motor after a crash while staying armed: a sharp acceleration spike near the accelerometer's full-scale, followed by the airframe lying still within 3 s (no rotation, resting 1 g, frozen baro altitude and - with a GPS fix - no ground speed). Moving the throttle to zero and up again re-allows the motor (short bursts help locating the aircraft in high grass). Arms only once clearly in flight (nav launch completed or throttle held above cruise for a moment), so a hand-launched aircraft can be carried armed. The impact threshold is DERIVED from the detected accelerometer (15% below full-scale), not set here - a spike that near saturation is an impact on any airframe, and the stillness that must follow is what tells a crash from a hard 3D figure. ON by default.
 
 | Default | Min | Max |
 | --- | --- | --- |
-| 80 | 0 | 160 |
+| ON | OFF | ON |
 
 ---
 
